@@ -1,0 +1,6 @@
+{
+  "short_name": "3StepForm",
+  "name": "React 3StepForm App",
+  "start_url": ".",
+  "display": "standalone"
+}

@@ -26,7 +26,7 @@ Po zapoznaniu się z podlinkowanymi artykułami wiesz już, na czym polega neumo
 
 Jeśli masz własną koncepcję komponentów, to nie widzę przeszkód, abyś z niej skorzystał. Jeśli nie, to możesz się wzorować na poniższej grafice od [Emy Lascan (MazePixel)](https://uibundle.com/products/428-freebie-neumorphic-ux-ui-elements).
 
-![](./example.png)
+![](./docs/example.png)
 
 ## Formularz
 
