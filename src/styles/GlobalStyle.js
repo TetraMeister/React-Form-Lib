@@ -24,10 +24,10 @@ const fontFaces = fonts
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    --color-bg: #efeeee;
+    --color-bg: #e0e0e0;
 
-    --shadow-neu-out: 5px -5px 18px hsla(36, 10%, 80%, 0.5), -5px 5px 18px #ffffff;;
-    --shadow-neu-in: inset 5px 5px 21px hsla(36, 10%, 80%, 0.5), inset -5px -5px 21px #ffffff;
+    --shadow-neu-out: 12px 12px 24px #c8cad0, -12px -12px 24px #ffffff;
+    --shadow-neu-in: inset 12px 12px 24px #c8cad0, inset -12px -12px 24px #ffffff;
 
     --color-primary: #3b6ef8;
     --color-primary-light: #5b8efb;
@@ -42,10 +42,10 @@ const GlobalStyle = createGlobalStyle`
     --color-active: #3b6ef8;
     --color-inactive: #c8cad0;
 
-    --radius-sm: 8px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
-    --radius-pill: 50px;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 25px;
 
     --space-1: 0.25rem;
     --space-2: 0.5rem;

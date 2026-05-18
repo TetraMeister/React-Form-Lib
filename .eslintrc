@@ -17,6 +17,14 @@
         "react/jsx-boolean-value": ["warn", "never"],
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
-        "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+        "import/no-unresolved": ["error", { "ignore": ["uuid"] }]
+    },
+    "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules"]
+      }
     }
+  }
 }
