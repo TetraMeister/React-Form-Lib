@@ -7,8 +7,8 @@ function MultiFormInputContainer(props) {
 
     return $label ? (
         <StyledMultiFormInputContainer $type={$type}>
-            <label htmlFor={id}>{$label}</label>
             {children}
+            <label htmlFor={id}>{$label}</label>
         </StyledMultiFormInputContainer>
     ) : (
         children

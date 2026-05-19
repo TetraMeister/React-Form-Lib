@@ -6,7 +6,7 @@ import { useMultiForm } from '../../hooks/useMultiForm';
 function MultiFormInput(props) {
     const { $type, $name, $value, $label } = props;
 
-    const { register } = useMultiForm();
+    const { register, errors } = useMultiForm();
 
     const id = useId();
 
@@ -31,6 +31,7 @@ function MultiFormInput(props) {
                 $label={$label}
                 {...($type !== 'submit' ? register($name) : {})}
             />
+            {errors?.[$name] && <span>{errors[$name].message}</span>}
         </MultiFormInputContainer>
     );
 }
