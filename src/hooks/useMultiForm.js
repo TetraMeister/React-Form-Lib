@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useMemo } from 'react';
+import React, { createContext, useContext, useState, useMemo, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -14,9 +14,8 @@ export const useMultiForm = () => {
     return context;
 };
 
-export function MultiFormProvider({ children, schema }) {
+export function MultiFormProvider({ children, $schema, $onSubmit }) {
     const [currentStep, setCurrentStep] = useState(1);
-    const [totalSteps, setTotalSteps] = useState(1);
 
     const {
         register,
@@ -24,8 +23,28 @@ export function MultiFormProvider({ children, schema }) {
         trigger,
         formState: { errors },
     } = useForm({
-        resolver: zodResolver(schema),
+        resolver: zodResolver($schema),
     });
+
+    const nextStep = useCallback(() => {
+        setCurrentStep((step) => step + 1);
+    }, []);
+
+    const prevStep = useCallback(() => {
+        setCurrentStep((step) => step - 1);
+    }, []);
+
+    const handleNext = useCallback(
+        async (fields) => {
+            const isValid = await trigger(fields);
+            if (isValid) {
+                nextStep();
+            }
+        },
+        [trigger, nextStep]
+    );
+
+    const handleFinalSubmit = useCallback(() => handleSubmit((data) => $onSubmit(data))(), [handleSubmit, $onSubmit]);
 
     const value = useMemo(
         () => ({
@@ -35,10 +54,11 @@ export function MultiFormProvider({ children, schema }) {
             errors,
             currentStep,
             setCurrentStep,
-            totalSteps,
-            setTotalSteps,
+            handleNext,
+            handleFinalSubmit,
+            prevStep,
         }),
-        [register, handleSubmit, trigger, errors, currentStep, totalSteps]
+        [register, handleSubmit, trigger, errors, currentStep, handleNext, handleFinalSubmit, prevStep]
     );
 
     return <MultiFormContext.Provider value={value}>{children}</MultiFormContext.Provider>;

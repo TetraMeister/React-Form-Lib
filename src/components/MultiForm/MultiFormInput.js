@@ -1,12 +1,14 @@
-import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useId } from 'react';
 import StyledMultiFormInput from './MultiFormInput.styled';
 import MultiFormInputContainer from './MultiFormInputContainer';
+import { useMultiForm } from '../../hooks/useMultiForm';
 
 function MultiFormInput(props) {
     const { $type, $name, $value, $label } = props;
 
-    const id = uuidv4();
+    const { register } = useMultiForm();
+
+    const id = useId();
 
     const value = () => {
         if ($value) {
@@ -20,7 +22,6 @@ function MultiFormInput(props) {
 
     return (
         <MultiFormInputContainer $label={$label} $type={$type}>
-            <label htmlFor={id}>{$label}</label>
             <StyledMultiFormInput
                 id={id}
                 type={$type}
@@ -28,6 +29,7 @@ function MultiFormInput(props) {
                 value={value()}
                 placeholder={$name}
                 $label={$label}
+                {...($type !== 'submit' ? register($name) : {})}
             />
         </MultiFormInputContainer>
     );

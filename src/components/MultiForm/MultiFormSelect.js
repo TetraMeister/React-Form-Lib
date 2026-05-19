@@ -1,5 +1,4 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import StyledMultiFormSelect from './MultiFormSelect.styled';
 
 function MultiFormSelect(props) {
@@ -9,7 +8,7 @@ function MultiFormSelect(props) {
         <StyledMultiFormSelect>
             <h4>{children}</h4>
             {$options?.map((option) => (
-                <li key={uuidv4()}>{option}</li>
+                <li key={option}>{option}</li>
             ))}
         </StyledMultiFormSelect>
     );
