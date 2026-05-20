@@ -1,18 +1,20 @@
 import React from 'react';
 import StyledMultiForm from './MultiForm.styled';
 import MultiFormTitle from './MultiFormTitle';
+import MultiFormStyles from '../../styles/MultiFormStyles';
 
 import { MultiFormProvider, useMultiForm } from '../../hooks/useMultiForm';
 
-function MultiForm(props) {
-    const { $title, $width, $schema, $onSubmit, children } = props;
-
+function MultiForm({ $title, $width, $schema, $onSubmit, children }) {
     return (
-        <MultiFormProvider $schema={$schema} $onSubmit={$onSubmit}>
-            <MultiFormInner $title={$title} $width={$width}>
-                {children}
-            </MultiFormInner>
-        </MultiFormProvider>
+        <>
+            <MultiFormStyles />
+            <MultiFormProvider $schema={$schema} $onSubmit={$onSubmit}>
+                <MultiFormInner $title={$title} $width={$width}>
+                    {children}
+                </MultiFormInner>
+            </MultiFormProvider>
+        </>
     );
 }
 
@@ -31,13 +33,12 @@ function MultiFormInner({ $title, $width, children }) {
             <MultiFormTitle $width={$width}>{$title}</MultiFormTitle>
             {React.Children.map(children, (child, index) => {
                 const step = child.props.$nr ?? index + 1;
-                if (step !== currentStep) {
-                    return null;
-                }
+                const isActive = step === currentStep;
 
                 return React.cloneElement(child, {
                     $onSubmit: isLastStep ? handleFinalSubmit : handleNext,
                     $prevStep: !isFirstStep ? prevStep : null,
+                    $display: isActive,
                 });
             })}
         </StyledMultiForm>

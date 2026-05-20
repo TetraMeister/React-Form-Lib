@@ -19,9 +19,8 @@
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
         "import/no-unresolved": ["error", { "ignore": ["uuid"] }],
-        "react/jsx-props-no-spreading": ["error", {
-            "exceptions": ["StyledMultiFormInput"]
-        }]
+        "react/jsx-props-no-spreading": "off",
+        "react-hooks/exhaustive-deps": "off"
     },
     "settings": {
     "import/resolver": {

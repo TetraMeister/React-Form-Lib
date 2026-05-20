@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-const StyledMultiFormSelect = styled.ul`
-  
-`;
+const StyledMultiFormSelect = styled.div``;
 
 export default StyledMultiFormSelect;

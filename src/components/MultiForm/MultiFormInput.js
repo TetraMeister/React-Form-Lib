@@ -3,15 +3,13 @@ import StyledMultiFormInput from './MultiFormInput.styled';
 import MultiFormInputContainer from './MultiFormInputContainer';
 import { useMultiForm } from '../../hooks/useMultiForm';
 
-function MultiFormInput(props) {
-    const { $type, $name, $value, $label } = props;
-
-    const { register } = useMultiForm();
+function MultiFormInput({ $type, $name, $value, $label, $noRegister }) {
+    const { register, errors } = useMultiForm();
 
     const id = useId();
 
     const value = () => {
-        if ($value) {
+        if (($value && $type === 'radio') || ($value && $type === 'checkbox')) {
             return $value;
         }
         if ($type === 'submit') {
@@ -21,16 +19,19 @@ function MultiFormInput(props) {
     };
 
     return (
-        <MultiFormInputContainer $label={$label} $type={$type}>
+        <MultiFormInputContainer $label={$label} $type={$type} id={id}>
             <StyledMultiFormInput
                 id={id}
                 type={$type}
                 name={$name}
                 value={value()}
-                placeholder={$name}
+                placeholder={!$label && $name}
                 $label={$label}
-                {...($type !== 'submit' ? register($name) : {})}
+                {...($type !== 'submit' && !$noRegister ? register($name) : {})}
             />
+            {errors?.[$name] && $type !== 'radio' && errors?.[$name] && $type !== 'checkbox' && (
+                <span>{errors[$name].message}</span>
+            )}
         </MultiFormInputContainer>
     );
 }

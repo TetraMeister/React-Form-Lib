@@ -2,9 +2,7 @@ import React from 'react';
 
 import StyledMultiFormInputContainer from './MultiFormInputContainer.styled';
 
-function MultiFormInputContainer(props) {
-    const { $type, $label, children, id } = props;
-
+function MultiFormInputContainer({ $type, $label, children, id }) {
     return $label ? (
         <StyledMultiFormInputContainer $type={$type}>
             <label htmlFor={id}>{$label}</label>

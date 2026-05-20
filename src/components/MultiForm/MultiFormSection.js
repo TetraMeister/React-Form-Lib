@@ -1,10 +1,9 @@
 import React from 'react';
+import MultiFormInput from './MultiFormInput';
 
 import StyledMultiFormSection from './MultiFormSection.styled';
 
-function MultiFormSection(props) {
-    const { children, $nr, $prevStep, $onSubmit } = props;
-
+function MultiFormSection({ children, $nr, $prevStep, $onSubmit, $display }) {
     const isDisabled = !$prevStep;
 
     const fields = [
@@ -25,11 +24,16 @@ function MultiFormSection(props) {
                 ev.preventDefault();
                 $onSubmit(fields);
             }}
+            $display={$display}
+            noValidate
         >
             {children}
-            <button type="button" onClick={$prevStep} disabled={isDisabled}>
-                Prev
-            </button>
+            <div>
+                <button type="button" onClick={$prevStep} disabled={isDisabled}>
+                    Prev
+                </button>
+                <MultiFormInput $type="submit" />
+            </div>
         </StyledMultiFormSection>
     );
 }

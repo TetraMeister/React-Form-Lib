@@ -16,11 +16,22 @@ export const useMultiForm = () => {
 
 export function MultiFormProvider({ children, $schema, $onSubmit }) {
     const [currentStep, setCurrentStep] = useState(1);
+    const [displayValues, setDisplayValues] = useState({});
+
+    const setDisplayValue = useCallback((name, value) => {
+        setDisplayValues((prev) => ({ ...prev, [name]: value }));
+    }, []);
+
+    const resetDisplayValues = useCallback(() => {
+        setDisplayValues({});
+    }, []);
 
     const {
         register,
         handleSubmit,
         trigger,
+        setValue,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: zodResolver($schema),
@@ -44,21 +55,46 @@ export function MultiFormProvider({ children, $schema, $onSubmit }) {
         [trigger, nextStep]
     );
 
-    const handleFinalSubmit = useCallback(() => handleSubmit((data) => $onSubmit(data))(), [handleSubmit, $onSubmit]);
+    const handleFinalSubmit = useCallback(
+        () =>
+            handleSubmit((data) => {
+                $onSubmit(data);
+                reset();
+                resetDisplayValues();
+            })(),
+        [handleSubmit, $onSubmit, reset]
+    );
 
     const value = useMemo(
         () => ({
             register,
             handleSubmit,
             trigger,
+            reset,
+            setValue,
             errors,
             currentStep,
             setCurrentStep,
             handleNext,
             handleFinalSubmit,
             prevStep,
+            displayValues,
+            setDisplayValue,
         }),
-        [register, handleSubmit, trigger, errors, currentStep, handleNext, handleFinalSubmit, prevStep]
+        [
+            register,
+            reset,
+            handleSubmit,
+            trigger,
+            errors,
+            currentStep,
+            handleNext,
+            handleFinalSubmit,
+            prevStep,
+            setValue,
+            displayValues,
+            setDisplayValue,
+        ]
     );
 
     return <MultiFormContext.Provider value={value}>{children}</MultiFormContext.Provider>;
