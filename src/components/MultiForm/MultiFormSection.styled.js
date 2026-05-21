@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const StyledMultiFormSection = styled.form`
-    ${({ $display }) => ($display ? { display: 'flex' } : { display: 'none' })}
+    /* ${({ $display }) => ($display ? { display: 'flex' } : { display: 'none' })} */
+    border: 1px solid black;
     flex-direction: column;
     justify-content: center;
     align-items: center;

@@ -1,24 +1,35 @@
 import { createGlobalStyle } from 'styled-components';
 
 const MultiFormStyles = createGlobalStyle`
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     :root {
-        --color-bg: #e0e0e0;
+        --neu-bg: #e0e5ec;              
+        --neu-text: #4d5b6e;
+        --neu-text-muted: #8a97a8;
+        --neu-accent: #5b7cfa;
+        --neu-accent-text: #ffffff;
 
-        --shadow-neu-out: 12px 12px 24px #c8cad0, -12px -12px 24px #ffffff;
-        --shadow-neu-in: inset 12px 12px 24px #c8cad0, inset -12px -12px 24px #ffffff;
+        --neu-shadow-dark: #a3b1c6;
+        --neu-shadow-light: #ffffff;
 
-        --color-primary: #3b6ef8;
-        --color-primary-light: #5b8efb;
-        --color-accent: #00d4d4;
-        --color-blue-gradient: linear-gradient(135deg, #3b6ef8, #00d4d4);
-        --color-white-gradient: linear-gradient(45deg, #eeeeee, #c8c8c8);
+        --neu-distance: 6px;
+        --neu-blur: 12px;
 
-        --color-text: #5a5f7a;
-        --color-text-light: #9098b0;
-        --color-text-placeholder: #b0b8cc;
+        --neu-shadow-out:
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-shadow-dark),
+        calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-shadow-light);
 
-        --color-active: #3b6ef8;
-        --color-inactive: #c8cad0;
+        --neu-shadow-in:
+        inset var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-shadow-dark),
+        inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-shadow-light);
+
+        --neu-shadow-flat: none;
+        --neu-border-flat: 1px solid var(--neu-shadow-light);
 
         --radius-sm: 4px;
         --radius-md: 8px;

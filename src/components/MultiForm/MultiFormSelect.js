@@ -24,14 +24,14 @@ function MultiFormSelect({ $options, children, $name }) {
             <input type="hidden" {...register($name)} />
             <label htmlFor={id}>{children}</label>
             <input id={id} type="text" readOnly value={displayValue} onClick={handleIsOpen} />
-            <ul>
+            <div>
                 {isOpen &&
                     $options?.map((option) => (
                         <button type="button" key={option} onClick={() => handleValueChange(option)}>
                             {option}
                         </button>
                     ))}
-            </ul>
+            </div>
         </StyledMultiFormSelect>
     );
 }

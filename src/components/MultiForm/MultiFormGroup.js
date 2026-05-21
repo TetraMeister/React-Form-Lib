@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import MultiFormInput from './MultiFormInput';
+import StyledMultiFormErrors from './MultiFormErrors.styled';
 import StyledMultiFormGroup from './MultiFormGroup.styled';
 import { useMultiForm } from '../../hooks/useMultiForm';
 
-function MultiFormGroup({ $options, $type, $name, children, $variant }) {
+function MultiFormGroup({ $options, $type, $name, children }) {
     const { errors } = useMultiForm();
-    const [isOpen, setIsOpen] = useState(false);
 
     const inputList = $options.map((option) => (
         <MultiFormInput key={option} $type={$type} $name={$name} $value={option} $label={option} />
     ));
 
     return (
-        <StyledMultiFormGroup $variant={$variant}>
-            {$variant === 'select' ? (
-                <button type="button" onClick={() => setIsOpen((state) => !state)}>
-                    {children}
-                </button>
-            ) : (
-                <h4>{children}</h4>
-            )}
-            {($variant !== 'select' || isOpen) && inputList}
-            {errors?.[$name] && <span>{errors[$name].message}</span>}
+        <StyledMultiFormGroup>
+            <h4>{children}</h4>
+            {inputList}
+            {errors?.[$name] && <StyledMultiFormErrors>{errors[$name].message}</StyledMultiFormErrors>}
         </StyledMultiFormGroup>
     );
 }
