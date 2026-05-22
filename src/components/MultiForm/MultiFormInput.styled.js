@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
 
 const StyledMultiFormInput = styled.input`
+    border: var(--neu-border-flat);
+    border-color: transparent;
+
     ${({ type }) => {
         if (type === 'radio' || type === 'checkbox') {
             return css`
@@ -14,7 +17,6 @@ const StyledMultiFormInput = styled.input`
 
         if (type === 'submit') {
             return css`
-                width: 100%;
                 padding: var(--space-3) var(--space-4);
                 border: none;
                 border-radius: var(--radius-md);
@@ -25,12 +27,10 @@ const StyledMultiFormInput = styled.input`
                 font-family: inherit;
                 box-shadow: var(--neu-shadow-out);
                 cursor: pointer;
-                transition:
-                    box-shadow 0.15s ease-in-out,
-                    color 0.15s ease-in-out;
+                transition: box-shadow 0.15s ease-in-out;
 
                 &:hover {
-                    color: var(--neu-accent);
+                    box-shadow: var(--neu-shadow-flat);
                 }
 
                 &:active {
@@ -45,9 +45,8 @@ const StyledMultiFormInput = styled.input`
         }
 
         return css`
-            width: 100%;
+            width: 80%;
             padding: var(--space-3) var(--space-4);
-            border: var(--neu-border-flat);
             border-radius: var(--radius-md);
             background: var(--neu-bg);
             color: var(--neu-text);
@@ -66,17 +65,8 @@ const StyledMultiFormInput = styled.input`
 
             &:focus {
                 outline: none;
-                border-color: transparent;
+                border: var(--neu-border-flat);
                 box-shadow: var(--neu-shadow-flat);
-            }
-
-            &[type='number'] {
-                -moz-appearance: textfield;
-            }
-            &[type='number']::-webkit-outer-spin-button,
-            &[type='number']::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
             }
         `;
     }}

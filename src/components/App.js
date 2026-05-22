@@ -15,14 +15,14 @@ function App() {
                 // eslint-disable-next-line
                 $onSubmit={(data) => console.log(data)}
             >
-                <MultiForm.Section $nr={1}>
+                <MultiForm.Section $nr={1} $title="Logowanie">
                     <MultiForm.Input $type="text" $name="firstName" $label="Imię" />
                     <MultiForm.Input $type="text" $name="lastName" $label="Nazwisko" />
                     <MultiForm.Input $type="email" $name="email" />
                     <MultiForm.Input $type="password" $name="password" />
                 </MultiForm.Section>
 
-                <MultiForm.Section $nr={2}>
+                <MultiForm.Section $nr={2} $title="Dane konta">
                     <MultiForm.Select $name="country" $options={['Polska', 'Niemcy', 'Francja', 'Włochy']}>
                         Kraj
                     </MultiForm.Select>
@@ -30,7 +30,7 @@ function App() {
                     <MultiForm.Input $type="text" $name="street" $label="Ulica" />
                 </MultiForm.Section>
 
-                <MultiForm.Section $nr={3}>
+                <MultiForm.Section $nr={3} $title="Umiejętności">
                     <MultiForm.Group $type="radio" $name="experience" $options={['Junior', 'Mid', 'Senior']}>
                         Poziom doświadczenia
                     </MultiForm.Group>

@@ -49,8 +49,8 @@ const MultiFormStyles = createGlobalStyle`
 
         --font-size-sm: 0.5rem;
         --font-size-md: 1rem;
-        --font-size-lg: 2rem;
-        --font-size-xxl: 4rem;
+        --font-size-lg: 1.5rem;
+        --font-size-xxl: 3rem;
     }
 `;
 

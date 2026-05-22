@@ -1,26 +1,33 @@
 import styled, { css } from 'styled-components';
 
-const MARKER_TYPES = ['radio', 'checkbox'];
+const TYPES = ['radio', 'checkbox'];
 
 const StyledMultiFormInputContainer = styled.div`
     position: relative;
+    display: flex;
+    width: 100%;
 
     ${({ $type }) =>
-        MARKER_TYPES.includes($type)
+        !TYPES.includes($type) &&
+        css`
+            justify-content: center;
+            align-items: center;
+
+            label {
+                width: 75%;
+                display: flex;
+                justify-content: flex-start;
+            }
+        `}
+
+    ${({ $type }) =>
+        TYPES.includes($type)
             ? css`
-                  display: flex;
                   align-items: center;
                   gap: var(--space-3);
                   padding: var(--space-3) var(--space-4);
                   background: var(--neu-bg);
-                  border-radius: var(--radius-md);
-                  box-shadow: var(--neu-shadow-out);
-                  cursor: pointer;
-                  transition: box-shadow 0.2s ease-in-out;
 
-                  &:has(input:checked) {
-                      box-shadow: var(--neu-shadow-in);
-                  }
                   &:has(input:focus-visible) {
                       outline: 2px solid var(--neu-accent);
                       outline-offset: 2px;
@@ -31,7 +38,6 @@ const StyledMultiFormInputContainer = styled.div`
                       display: flex;
                       align-items: center;
                       gap: var(--space-3);
-                      width: 100%;
                       color: var(--neu-text);
                       font-size: var(--font-size-md);
                       cursor: pointer;
@@ -73,7 +79,6 @@ const StyledMultiFormInputContainer = styled.div`
                   }
               `
             : css`
-                  display: flex;
                   flex-direction: column;
                   gap: var(--space-2);
 

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import MultiFormInput from './MultiFormInput';
-import StyledMultiFormErrors from './MultiFormErrors.styled';
 import StyledMultiFormGroup from './MultiFormGroup.styled';
 import { useMultiForm } from '../../hooks/useMultiForm';
 
@@ -16,7 +15,7 @@ function MultiFormGroup({ $options, $type, $name, children }) {
         <StyledMultiFormGroup>
             <h4>{children}</h4>
             {inputList}
-            {errors?.[$name] && <StyledMultiFormErrors>{errors[$name].message}</StyledMultiFormErrors>}
+            {errors?.[$name] && <span>{errors[$name].message}</span>}
         </StyledMultiFormGroup>
     );
 }

@@ -3,7 +3,7 @@ import MultiFormInput from './MultiFormInput';
 
 import StyledMultiFormSection from './MultiFormSection.styled';
 
-function MultiFormSection({ children, $nr, $prevStep, $onSubmit, $display }) {
+function MultiFormSection({ children, $nr, $prevStep, $onSubmit, $display, $title }) {
     const isDisabled = !$prevStep;
 
     const fields = [
@@ -27,8 +27,9 @@ function MultiFormSection({ children, $nr, $prevStep, $onSubmit, $display }) {
             $display={$display}
             noValidate
         >
+            <h3>{$title}</h3>
             {children}
-            <div>
+            <div className="section__controls">
                 <button type="button" onClick={$prevStep} disabled={isDisabled}>
                     Prev
                 </button>
