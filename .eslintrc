@@ -20,7 +20,8 @@
         "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
         "import/no-unresolved": ["error", { "ignore": ["uuid"] }],
         "react/jsx-props-no-spreading": "off",
-        "react-hooks/exhaustive-deps": "off"
+        "react-hooks/exhaustive-deps": "off",
+        "react/jsx-no-constructed-context-values": "off"
     },
     "settings": {
     "import/resolver": {

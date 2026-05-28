@@ -1,10 +1,14 @@
 import React from 'react';
 import MultiFormInput from './MultiFormInput';
+import { useMultiForm } from '../../hooks/useMultiForm';
+import MultiFormNotification from './MultiFormNotification';
 
 import StyledMultiFormSection from './MultiFormSection.styled';
 
 function MultiFormSection({ children, $nr, $prevStep, $onSubmit, $display, $title }) {
     const isDisabled = !$prevStep;
+
+    const { submitStatus } = useMultiForm();
 
     const fields = [
         ...new Set(
@@ -27,14 +31,20 @@ function MultiFormSection({ children, $nr, $prevStep, $onSubmit, $display, $titl
             $display={$display}
             noValidate
         >
-            <h3>{$title}</h3>
-            {children}
-            <div className="section__controls">
-                <button type="button" onClick={$prevStep} disabled={isDisabled}>
-                    Prev
-                </button>
-                <MultiFormInput $type="submit" />
-            </div>
+            {submitStatus === null ? (
+                <>
+                    <h3>{$title}</h3>
+                    {children}
+                    <div className="section__controls">
+                        <button type="button" onClick={$prevStep} disabled={isDisabled}>
+                            Prev
+                        </button>
+                        <MultiFormInput $type="submit" />
+                    </div>
+                </>
+            ) : (
+                <MultiFormNotification />
+            )}
         </StyledMultiFormSection>
     );
 }

@@ -17,6 +17,7 @@ export const useMultiForm = () => {
 export function MultiFormProvider({ children, $schema, $onSubmit }) {
     const [currentStep, setCurrentStep] = useState(1);
     const [displayValues, setDisplayValues] = useState({});
+    const [submitStatus, setSubmitStatus] = useState(null);
 
     const setDisplayValue = useCallback((name, value) => {
         setDisplayValues((prev) => ({ ...prev, [name]: value }));
@@ -26,15 +27,10 @@ export function MultiFormProvider({ children, $schema, $onSubmit }) {
         setDisplayValues({});
     }, []);
 
-    const {
-        register,
-        handleSubmit,
-        trigger,
-        setValue,
-        reset,
-        formState: { errors },
-    } = useForm({
+    const { register, handleSubmit, trigger, setValue, reset, formState } = useForm({
         resolver: zodResolver($schema),
+        mode: 'onTouched',
+        reValidateMode: 'onChange',
     });
 
     const nextStep = useCallback(() => {
@@ -55,14 +51,32 @@ export function MultiFormProvider({ children, $schema, $onSubmit }) {
         [trigger, nextStep]
     );
 
-    const handleFinalSubmit = useCallback(
-        () =>
-            handleSubmit((data) => {
-                $onSubmit(data);
+    const handleSubmitResp = useCallback(
+        (status) => {
+            setSubmitStatus(status);
+            const timer = setTimeout(() => {
                 reset();
                 resetDisplayValues();
+                setSubmitStatus(null);
+                setCurrentStep(1);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        },
+        [reset, resetDisplayValues]
+    );
+
+    const handleFinalSubmit = useCallback(
+        () =>
+            handleSubmit(async (data) => {
+                try {
+                    await $onSubmit(data);
+                    handleSubmitResp('success');
+                } catch {
+                    handleSubmitResp('error');
+                }
             })(),
-        [handleSubmit, $onSubmit, reset]
+        [handleSubmit, $onSubmit, handleSubmitResp]
     );
 
     const value = useMemo(
@@ -72,7 +86,6 @@ export function MultiFormProvider({ children, $schema, $onSubmit }) {
             trigger,
             reset,
             setValue,
-            errors,
             currentStep,
             setCurrentStep,
             handleNext,
@@ -80,13 +93,13 @@ export function MultiFormProvider({ children, $schema, $onSubmit }) {
             prevStep,
             displayValues,
             setDisplayValue,
+            submitStatus,
         }),
         [
             register,
             reset,
             handleSubmit,
             trigger,
-            errors,
             currentStep,
             handleNext,
             handleFinalSubmit,
@@ -94,8 +107,11 @@ export function MultiFormProvider({ children, $schema, $onSubmit }) {
             setValue,
             displayValues,
             setDisplayValue,
+            submitStatus,
         ]
     );
 
-    return <MultiFormContext.Provider value={value}>{children}</MultiFormContext.Provider>;
+    return (
+        <MultiFormContext.Provider value={{ ...value, errors: formState.errors }}>{children}</MultiFormContext.Provider>
+    );
 }

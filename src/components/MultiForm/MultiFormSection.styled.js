@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledMultiFormSection = styled.form`
     ${({ $display }) => ($display ? { display: 'flex' } : { display: 'none' })}
 
-    gap: var(--space-6);
+    gap: var(--space-8);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -58,6 +58,7 @@ const StyledMultiFormSection = styled.form`
         &:disabled {
             color: var(--neu-text-muted);
             box-shadow: var(--neu-shadow-in);
+            cursor: not-allowed;
         }
     }
 `;
