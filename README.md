@@ -208,7 +208,7 @@ Single-step usage works mostly by _not_ rendering the `Prev` button, which is mo
 
 ## 🙋‍♂️ Feel free to contact me
 
-Write sth nice ;) Find me on...
+Write sth nice ;) Find me on [LinkedIn](https://www.linkedin.com/in/łukasz-skrzypczyński-26759b318/)
 
 &nbsp;
 
