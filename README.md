@@ -1,6 +1,4 @@
-![First section](./docs/formDemo1.png)
-![Second section](./docs/formDemo2.png)
-![Third section](./docs/formDemo3.png)
+![Mockup](/docs/mockup.svg)
 
 # MultiForm — Neumorphic Multi-Step Form
 
