@@ -4,9 +4,17 @@ import MultiForm from './MultiForm';
 
 import schema from '../schema/schema';
 
+const mockupHolderStyles = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100vw',
+    height: '100vh',
+};
+
 function App() {
     return (
-        <>
+        <section style={mockupHolderStyles}>
             <GlobalStyle />
             <MultiForm
                 $title="Formularz aplikacji"
@@ -43,7 +51,7 @@ function App() {
                     </MultiForm.Group>
                 </MultiForm.Section>
             </MultiForm>
-        </>
+        </section>
     );
 }
 
